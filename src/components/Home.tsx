@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom";
+
 const Home = () => {
   return (
     <div className="dark:text-white w-[40%] h-auto flex flex-col   items-center mx-auto gap-28 mt-28">
-      {/* Home content starts directly below the Appbar */}
       <div className="flex flex-col gap-7 items-center">
         <h1 className="text-6xl text-center font-bold mx-auto">
           Online Dicom Viewer
@@ -13,9 +14,11 @@ const Home = () => {
           Perfect for healthcare professionals 👨‍⚕️ seeking efficient and accurate
           diagnostics.
         </p>
-        <button className="dark:bg-white bg-black px-4 py-3 rounded-md dark:text-black text-white w-44 dark:hover:bg-[#D0D0D0]  hover:bg-[#252525] ">
-          View Dicom Images
-        </button>
+        <Link to="/dicom">
+          <button className="dark:bg-white bg-black px-4 py-3 rounded-md dark:text-black text-white w-44 dark:hover:bg-[#D0D0D0]  hover:bg-[#252525]">
+            View Dicom Images
+          </button>
+        </Link>
       </div>
 
       <div className="w-full  h-auto flex flex-col gap-10">
@@ -24,7 +27,6 @@ const Home = () => {
         <hr className="border-slate-200 dark:border-[#1f1f1f]" />
         <hr className="border-slate-200 dark:border-[#1f1f1f]" />
       </div>
-
     </div>
   );
 };

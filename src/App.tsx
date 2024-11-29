@@ -1,13 +1,13 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Home from './components/Home'
+import { Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import DicomViewer from "./components/DicomViewer";
 const App = () => {
   return (
-    <Router>
     <Routes>
-      <Route path="/" element={<Home/>} />
+      <Route path="/" element={<Home />} />
+      <Route path="/dicom" element={<DicomViewer />} />
     </Routes>
-  </Router>
-  )
-}
+  );
+};
 
-export default App
+export default App;
