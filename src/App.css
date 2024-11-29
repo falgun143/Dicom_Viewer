@@ -1,0 +1,9 @@
+:root {
+  display: flex;
+  justify-content: center;
+}
+
+/* body {
+  font-size: var(--font-size);
+  color: var(--primary-color);
+} */
