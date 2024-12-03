@@ -36,7 +36,7 @@ const Appbar = ({ children }: { children: React.ReactNode }) => {
           </div>
         </div>
 
-        <hr className="border-slate-200 dark:border-[#434343]" />
+        <hr className="border-slate-300 dark:border-[#434343]" />
       </div>
 
       {children}

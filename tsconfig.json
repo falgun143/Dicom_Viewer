@@ -1,7 +1,13 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "compilerOptions": {
+    "composite": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "target": "esnext",
+    "strict": true,
+     "jsx": "react",
+     "esModuleInterop": true,
+     "typeRoots": ["node_modules/@types", "src/types"]
+  }
 }
