@@ -8,6 +8,7 @@ import {
   Circle,
   Text,
 } from "react-konva";
+import Konva from "konva";
 import { KonvaEventObject } from "konva/lib/Node";
 import { ImageSize, Position, Measurement } from "../types/interface";
 
@@ -29,7 +30,7 @@ interface ImageCanvasProps {
   handleMouseDown: (e: KonvaEventObject<MouseEvent>) => void;
   handleMouseMove: (e: KonvaEventObject<MouseEvent>) => void;
   handleMouseUp: () => void;
-  imageRef: React.RefObject<KonvaImage>;
+  imageRef: React.RefObject<Konva.Node>;
   cropLayerRef: React.RefObject<Konva.Layer>;
   setPosition: React.Dispatch<React.SetStateAction<Position>>;
   setCropStart: React.Dispatch<React.SetStateAction<Position | null>>;
