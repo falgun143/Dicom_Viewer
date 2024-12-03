@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { KonvaEventObject } from "konva/lib/Node";
+import Konva from "konva";
 import cornerstone from "cornerstone-core";
 import Configure_Loader from "../services/Configure";
 import getImageId from "../services/GetImageId";
@@ -8,7 +9,7 @@ import { PuffLoader } from "react-spinners";
 import { ImageSize, Position, Measurement, DicomMetadata } from "../types/interface";
 import { isRegularImage } from "../services/IsRegularImage";
 import ImageCanvas from "./ImageCanvas";
-import Metadata from "./Metadata";
+import Metadata from "./MetaData";
 import ToolBar from "./ToolBar";
 
 const DicomViewer: React.FC = () => {
@@ -38,8 +39,6 @@ const DicomViewer: React.FC = () => {
     distance: 0,
     realWorldDistance: 0,
   });
-  const [showAdjustments, setShowAdjustments] = useState(false);
-
   const containerRef = useRef<HTMLDivElement | null>(null);
   const base64Image = localStorage.getItem("dicomImageBase64");
   const isDarkMode = document.documentElement.classList.contains("dark");
@@ -356,7 +355,6 @@ const DicomViewer: React.FC = () => {
       setSelectedTool("measure");
       setIsMagnifying(false);
       setIsCropping(false);
-      setShowAdjustments(false);
     }
   };
 
@@ -371,7 +369,6 @@ const DicomViewer: React.FC = () => {
     if (selectedTool === "magnify" || selectedTool === "adjust") {
       setSelectedTool("pan");
       setIsMagnifying(false);
-      setShowAdjustments(false);
     }
   };
 
@@ -445,7 +442,6 @@ const DicomViewer: React.FC = () => {
       // If clicking the same tool again, turn it off
       setSelectedTool("pan");
       setIsMagnifying(false);
-      setShowAdjustments(false);
     } else {
       setSelectedTool(tool);
       if (tool === "magnify") {
@@ -454,24 +450,11 @@ const DicomViewer: React.FC = () => {
         setIsMagnifying(false);
       }
       if (tool === "adjust") {
-        setShowAdjustments(true);
-      } else {
-        setShowAdjustments(false);
+        setIsCropping(false);
+        setIsDragging(false);
+        setIsMeasuring(false);
       }
     }
-    // Reset other tool states
-    setIsCropping(false);
-    setIsDragging(false);
-    setIsMeasuring(false);
-  };
-
-  const clearActiveTool = () => {
-    setIsCropping(false);
-    setIsMagnifying(false);
-    setIsMeasuring(false);
-    setCropStart(null);
-    setCropEnd(null);
-    setMagnifierPosition(null);
   };
 
   const clearMeasurement = () => {
@@ -503,16 +486,13 @@ const DicomViewer: React.FC = () => {
         handleZoomIn={handleZoomIn}
         handleZoomOut={handleZoomOut}
         handleMagnify={handleMagnify}
-        handleMeasure={handleMeasure}  // Add this line
+        handleMeasure={handleMeasure}
         resetView={resetView}
         downloadImage={downloadImage}
         brightness={brightness}
         contrast={contrast}
         handleBrightnessChange={handleBrightnessChange}
         handleContrastChange={handleContrastChange}
-        showAdjustments={showAdjustments}
-        setShowAdjustments={setShowAdjustments}
-        clearActiveTool={clearActiveTool}
         clearMeasurement={clearMeasurement}
       />
 

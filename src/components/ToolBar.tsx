@@ -24,6 +24,7 @@ interface ToolBarProps {
   handleBrightnessChange: (value: number) => void;
   handleContrastChange: (value: number) => void;
   clearMeasurement: () => void;  // Add this prop
+  handleMeasure?: () => void;  // Add this line to fix the type error
 }
 const tooltipStyle = `
 .tooltip {
