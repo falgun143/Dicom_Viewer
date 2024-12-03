@@ -1,5 +1,13 @@
 import React from "react";
-import { Stage, Layer, Image as KonvaImage, Rect, Line, Circle, Text } from "react-konva";
+import {
+  Stage,
+  Layer,
+  Image as KonvaImage,
+  Rect,
+  Line,
+  Circle,
+  Text,
+} from "react-konva";
 import { KonvaEventObject } from "konva/lib/Node";
 import { ImageSize, Position, Measurement } from "../types/interface";
 
@@ -38,29 +46,17 @@ const ImageCanvas: React.FC<ImageCanvasProps> = ({
   imageSize,
   position,
   scale,
-  isDragging,
-  initialMousePosition,
   isCropping,
   cropStart,
   cropEnd,
   isMagnifying,
   magnifierPosition,
   magnifierScale,
-  isMeasuring,
   measurement,
   handleMouseDown,
   handleMouseMove,
   handleMouseUp,
   imageRef,
-  cropLayerRef,
-  setPosition,
-  setCropStart,
-  setCropEnd,
-  setIsCropping,
-  setIsMagnifying,
-  setIsMeasuring,
-  setMeasurement,
-  magnifierColor,
 }) => {
   return (
     <Stage

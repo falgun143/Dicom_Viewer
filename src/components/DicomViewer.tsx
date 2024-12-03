@@ -6,7 +6,12 @@ import Configure_Loader from "../services/Configure";
 import getImageId from "../services/GetImageId";
 import Loader from "../services/Loader";
 import { PuffLoader } from "react-spinners";
-import { ImageSize, Position, Measurement, DicomMetadata } from "../types/interface";
+import {
+  ImageSize,
+  Position,
+  Measurement,
+  DicomMetadata,
+} from "../types/interface";
 import { isRegularImage } from "../services/IsRegularImage";
 import ImageCanvas from "./ImageCanvas";
 import Metadata from "./MetaData";
@@ -14,11 +19,17 @@ import ToolBar from "./ToolBar";
 
 const DicomViewer: React.FC = () => {
   const [image, setImage] = useState<HTMLImageElement | null>(null);
-  const [imageSize, setImageSize] = useState<ImageSize>({ width: 0, height: 0 });
+  const [imageSize, setImageSize] = useState<ImageSize>({
+    width: 0,
+    height: 0,
+  });
   const [position, setPosition] = useState<Position>({ x: 50, y: 50 });
   const [scale, setScale] = useState(1);
   const [isDragging, setIsDragging] = useState(false);
-  const [initialMousePosition, setInitialMousePosition] = useState<Position>({ x: 0, y: 0 });
+  const [initialMousePosition, setInitialMousePosition] = useState<Position>({
+    x: 0,
+    y: 0,
+  });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [metadata, setMetadata] = useState<DicomMetadata>({});
@@ -28,9 +39,13 @@ const DicomViewer: React.FC = () => {
   const [isCropping, setIsCropping] = useState(false);
   const [cropStart, setCropStart] = useState<Position | null>(null);
   const [cropEnd, setCropEnd] = useState<Position | null>(null);
-  const [originalImage, setOriginalImage] = useState<HTMLImageElement | null>(null);
+  const [originalImage, setOriginalImage] = useState<HTMLImageElement | null>(
+    null
+  );
   const [isMagnifying, setIsMagnifying] = useState(false);
-  const [magnifierPosition, setMagnifierPosition] = useState<Position | null>(null);
+  const [magnifierPosition, setMagnifierPosition] = useState<Position | null>(
+    null
+  );
   const [magnifierScale] = useState(2);
   const [isMeasuring, setIsMeasuring] = useState(false);
   const [measurement, setMeasurement] = useState<Measurement>({
@@ -42,7 +57,7 @@ const DicomViewer: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const base64Image = localStorage.getItem("dicomImageBase64");
   const isDarkMode = document.documentElement.classList.contains("dark");
-  const imageRef = useRef<Konva.Image>(null);
+  const imageRef = useRef<Konva.Stage>(null);
   const cropLayerRef = useRef<Konva.Layer>(null);
 
   const loaderColor = isDarkMode ? "#4A90E2" : "#111";
@@ -137,7 +152,10 @@ const DicomViewer: React.FC = () => {
     return { width: 0, height: 0 };
   };
 
-  const calculateInitialScale = (imgWidth: number, imgHeight: number): number => {
+  const calculateInitialScale = (
+    imgWidth: number,
+    imgHeight: number
+  ): number => {
     const { width, height } = getContainerSize();
     const scaleX = (width * 0.75) / imgWidth;
     const scaleY = (height * 0.75) / imgHeight;
@@ -208,7 +226,9 @@ const DicomViewer: React.FC = () => {
       setBrightness(100);
       setContrast(100);
       setPosition({ x: 50, y: 50 });
-      setScale(calculateInitialScale(originalImage.width, originalImage.height));
+      setScale(
+        calculateInitialScale(originalImage.width, originalImage.height)
+      );
     }
   };
 
@@ -360,7 +380,9 @@ const DicomViewer: React.FC = () => {
 
   const handleResize = () => {
     if (originalImage) {
-      setScale(calculateInitialScale(originalImage.width, originalImage.height));
+      setScale(
+        calculateInitialScale(originalImage.width, originalImage.height)
+      );
     }
   };
 
@@ -512,7 +534,10 @@ const DicomViewer: React.FC = () => {
       )}
 
       <div className="dark:text-white w-full h-auto flex justify-between items-center sm:mt-32 mt-60 overflow-hidden">
-        <div ref={containerRef} className="Dicom_Viewer flex flex-col justify-between w-[65%] sm:w-[75%] lg:w-[80%] h-[calc(100vh-112px)]">
+        <div
+          ref={containerRef}
+          className="Dicom_Viewer flex flex-col justify-between w-[65%] sm:w-[75%] lg:w-[80%] h-[calc(100vh-112px)]"
+        >
           <ImageCanvas
             image={image}
             imageSize={imageSize}
