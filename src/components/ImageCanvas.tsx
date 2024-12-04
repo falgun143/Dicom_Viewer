@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Stage,
   Layer,
@@ -7,40 +7,10 @@ import {
   Line,
   Circle,
   Text,
+  Group,
 } from "react-konva";
 import Konva from "konva";
-import { KonvaEventObject } from "konva/lib/Node";
-import { ImageSize, Position, Measurement } from "../types/interface";
-
-interface ImageCanvasProps {
-  image: HTMLImageElement | null;
-  imageSize: ImageSize;
-  position: Position;
-  scale: number;
-  isDragging: boolean;
-  initialMousePosition: Position;
-  isCropping: boolean;
-  cropStart: Position | null;
-  cropEnd: Position | null;
-  isMagnifying: boolean;
-  magnifierPosition: Position | null;
-  magnifierScale: number;
-  isMeasuring: boolean;
-  measurement: Measurement;
-  handleMouseDown: (e: KonvaEventObject<MouseEvent>) => void;
-  handleMouseMove: (e: KonvaEventObject<MouseEvent>) => void;
-  handleMouseUp: () => void;
-  imageRef: React.RefObject<Konva.Node>;
-  cropLayerRef: React.RefObject<Konva.Layer>;
-  setPosition: React.Dispatch<React.SetStateAction<Position>>;
-  setCropStart: React.Dispatch<React.SetStateAction<Position | null>>;
-  setCropEnd: React.Dispatch<React.SetStateAction<Position | null>>;
-  setIsCropping: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsMagnifying: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsMeasuring: React.Dispatch<React.SetStateAction<boolean>>;
-  setMeasurement: React.Dispatch<React.SetStateAction<Measurement>>;
-  magnifierColor: string;
-}
+import { ImageCanvasProps } from "../types/interface";
 
 const ImageCanvas: React.FC<ImageCanvasProps> = ({
   image,
@@ -59,6 +29,27 @@ const ImageCanvas: React.FC<ImageCanvasProps> = ({
   handleMouseUp,
   imageRef,
 }) => {
+  const [color, setColor] = useState("");
+  const magnifierLayerRef = React.useRef<Konva.Layer>(null);
+
+  useEffect(() => {
+    const updateColor = () => {
+      setColor(
+        document.documentElement.classList.contains("dark") ? "white" : "black"
+      );
+    };
+
+    updateColor();
+
+    const observer = new MutationObserver(updateColor);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <Stage
       width={window.innerWidth}
@@ -68,14 +59,16 @@ const ImageCanvas: React.FC<ImageCanvasProps> = ({
       onMouseUp={handleMouseUp}
     >
       <Layer>
-        <KonvaImage
-          image={image}
-          x={position.x}
-          y={position.y}
-          width={imageSize.width * scale}
-          height={imageSize.height * scale}
-          ref={imageRef}
-        />
+        {image && (
+          <KonvaImage
+            image={image}
+            x={position.x}
+            y={position.y}
+            width={imageSize.width * scale}
+            height={imageSize.height * scale}
+            ref={imageRef as React.RefObject<Konva.Image>}
+          />
+        )}
         {/* Update measurement rendering */}
         {measurement.startPoint && measurement.endPoint && (
           <>
@@ -125,31 +118,47 @@ const ImageCanvas: React.FC<ImageCanvasProps> = ({
         )}
       </Layer>
       {isMagnifying && magnifierPosition && (
-        <Layer>
-          <Rect
-            x={magnifierPosition.x - 50}
-            y={magnifierPosition.y - 50}
-            width={100}
-            height={100}
-            stroke="white"
-            strokeWidth={2}
-            dash={[5, 5]}
-            cornerRadius={150}
-          />
-          <KonvaImage
-            image={image || undefined}
-            x={magnifierPosition.x - 50}
-            y={magnifierPosition.y - 50}
-            width={100}
-            height={100}
-            scaleX={magnifierScale}
-            scaleY={magnifierScale}
-            crop={{
-              x: magnifierPosition.x - 50,
-              y: magnifierPosition.y - 50,
-              width: 100,
-              height: 100,
+        <Layer ref={magnifierLayerRef}>
+          <Group
+            clipFunc={(ctx) => {
+              ctx.beginPath();
+              ctx.arc(
+                magnifierPosition.x,
+                magnifierPosition.y,
+                100,
+                0,
+                Math.PI * 2,
+                false
+              );
+              ctx.closePath();
             }}
+          >
+            <KonvaImage
+              image={image || undefined}
+              x={magnifierPosition.x}
+              y={magnifierPosition.y}
+              width={imageSize.width * scale}
+              height={imageSize.height * scale}
+              offsetX={magnifierPosition.x - position.x}
+              offsetY={magnifierPosition.y - position.y}
+              scaleX={scale * magnifierScale}
+              scaleY={scale * magnifierScale}
+            />
+          </Group>
+          {/* Border circle */}
+          <Circle
+            x={magnifierPosition.x}
+            y={magnifierPosition.y}
+            radius={100}
+            stroke={color}
+            strokeWidth={2}
+          />
+          {/* Center dot */}
+          <Circle
+            x={magnifierPosition.x}
+            y={magnifierPosition.y}
+            radius={2}
+            fill="#ffe600"
           />
         </Layer>
       )}

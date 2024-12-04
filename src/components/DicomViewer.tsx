@@ -11,6 +11,7 @@ import {
   Position,
   Measurement,
   DicomMetadata,
+  DicomImageType,
 } from "../types/interface";
 import { isRegularImage } from "../services/IsRegularImage";
 import ImageCanvas from "./ImageCanvas";
@@ -33,7 +34,7 @@ const DicomViewer: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [metadata, setMetadata] = useState<DicomMetadata>({});
-  const [selectedTool, setSelectedTool] = useState<string>("pan");
+  const [selectedTool, setSelectedTool] = useState<string>("");
   const [brightness, setBrightness] = useState(100);
   const [contrast, setContrast] = useState(100);
   const [isCropping, setIsCropping] = useState(false);
@@ -57,7 +58,7 @@ const DicomViewer: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const base64Image = localStorage.getItem("dicomImageBase64");
   const isDarkMode = document.documentElement.classList.contains("dark");
-  const imageRef = useRef<Konva.Stage>(null);
+  const imageRef = useRef<Konva.Image>(null);
   const cropLayerRef = useRef<Konva.Layer>(null);
 
   const loaderColor = isDarkMode ? "#4A90E2" : "#111";
@@ -99,7 +100,7 @@ const DicomViewer: React.FC = () => {
 
         Configure_Loader();
         const imageId = getImageId(dicomFile);
-        const dicomImage = await Loader(imageId);
+        const dicomImage = (await Loader(imageId)) as DicomImageType;
 
         const studyDate = dicomImage.data?.string("x00080020") || "";
         const year = studyDate.substring(0, 4);
@@ -113,7 +114,6 @@ const DicomViewer: React.FC = () => {
           studyDate: date,
           modality: dicomImage.data?.string("x00080060"),
           studyDescription: dicomImage.data?.string("x00081030"),
-          pixelSpacing: dicomImage.data?.string("x00280030"),
         });
 
         const canvas = document.createElement("canvas");
@@ -217,6 +217,9 @@ const DicomViewer: React.FC = () => {
   };
 
   const resetView = () => {
+    clearMeasurement();
+    setSelectedTool("");
+    setIsMagnifying(false);
     if (originalImage) {
       setImage(originalImage);
       setImageSize({
@@ -362,7 +365,6 @@ const DicomViewer: React.FC = () => {
   const handleMeasure = () => {
     if (selectedTool === "measure") {
       // If measure is already active, deactivate it
-      setSelectedTool("pan");
       setIsMeasuring(false);
       setMeasurement({
         startPoint: null,
@@ -389,8 +391,7 @@ const DicomViewer: React.FC = () => {
   const handleRightClick = (e: MouseEvent) => {
     e.preventDefault();
     if (selectedTool === "magnify" || selectedTool === "adjust") {
-      setSelectedTool("pan");
-      setIsMagnifying(false);
+      //setIsMagnifying(false);
     }
   };
 
@@ -401,7 +402,7 @@ const DicomViewer: React.FC = () => {
       !target.closest(".adjustment-sliders") &&
       !target.closest('button[data-tool="adjust"]')
     ) {
-      setSelectedTool("pan");
+      setSelectedTool("");
     }
   };
 
@@ -462,7 +463,7 @@ const DicomViewer: React.FC = () => {
   const handleToolSelect = (tool: string) => {
     if (tool === selectedTool) {
       // If clicking the same tool again, turn it off
-      setSelectedTool("pan");
+
       setIsMagnifying(false);
     } else {
       setSelectedTool(tool);
@@ -515,7 +516,6 @@ const DicomViewer: React.FC = () => {
         contrast={contrast}
         handleBrightnessChange={handleBrightnessChange}
         handleContrastChange={handleContrastChange}
-        clearMeasurement={clearMeasurement}
       />
 
       {isLoading && (

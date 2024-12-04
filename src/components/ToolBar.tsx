@@ -23,8 +23,7 @@ interface ToolBarProps {
   contrast: number;
   handleBrightnessChange: (value: number) => void;
   handleContrastChange: (value: number) => void;
-  clearMeasurement: () => void;  // Add this prop
-  handleMeasure?: () => void;  // Add this line to fix the type error
+  handleMeasure?: () => void;
 }
 const tooltipStyle = `
 .tooltip {
@@ -61,15 +60,13 @@ const ToolBar: React.FC<ToolBarProps> = ({
   contrast,
   handleBrightnessChange,
   handleContrastChange,
-  clearMeasurement,
 }) => {
   const handleToolSelect = (tool: string) => {
-    if (tool !== "measure") {
-      clearMeasurement(); // Clear measurements when switching to non-measure tools
-    }
     if (tool === "zoomIn") {
+      setSelectedTool("zoomIn");
       handleZoomIn();
     } else if (tool === "zoomOut") {
+      setSelectedTool("zoomOut");
       handleZoomOut();
     } else {
       setSelectedTool(selectedTool === tool ? "pan" : tool);

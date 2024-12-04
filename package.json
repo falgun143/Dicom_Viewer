@@ -24,7 +24,7 @@
     "react-dom": "^18.3.1",
     "react-icons": "^5.4.0",
     "react-konva": "^18.2.10",
-    "react-router-dom": "^6.x",
+    "react-router-dom": "^6.22.0",
     "react-spinners": "^0.14.1",
     "react-toggle-dark-mode": "^1.1.1"
   },
@@ -33,7 +33,7 @@
     "@types/cornerstone-core": "^2.3.3",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "@types/react-router-dom": "^5.3.3",
+    "@types/react-router-dom": "^6.22.0",
     "@vitejs/plugin-react": "^4.3.3",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.13.0",
