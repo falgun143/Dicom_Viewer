@@ -8,10 +8,7 @@ A specialized web application for viewing and manipulating DICOM (Digital Imagin
 
 ## Demo
 
-<video width="100%" controls>
-  <source src="https://github.com/user-attachments/assets/ee52063e-4bbd-44d5-89e8-c42e1ebc2e2e" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+https://github.com/user-attachments/assets/ee52063e-4bbd-44d5-89e8-c42e1ebc2e2e
 
 ## Table of Contents
 
