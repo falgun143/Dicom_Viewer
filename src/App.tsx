@@ -7,7 +7,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/upload_export" element={<UploadButtons />} />
+      <Route path="/upload" element={<UploadButtons />} />
       <Route path="/dicom" element={<DicomViewer />} />
     </Routes>
   );

@@ -1,50 +1,136 @@
-# React + TypeScript + Vite
+<a name="top"></a>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Origin Medical DICOM Viewer
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+A specialized web application for viewing and manipulating DICOM (Digital Imaging and Communications in Medicine) files, built with React, TypeScript, and Konva.js.
 
-## Expanding the ESLint configuration
+## Demo
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+<video width="100%" controls>
+  <source src="https://github.com/user-attachments/assets/ee52063e-4bbd-44d5-89e8-c42e1ebc2e2e" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
-- Configure the top-level `parserOptions` property like this:
+## Table of Contents
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- [Overview](#overview)
+- [Demo](#demo)
+- [Quick Start](#quick-start)
+- [Project Structure](#project-structure)
+- [Core Components](#core-components)
+- [Technical Implementation](#technical-implementation)
+- [Development Challenges](#development-challenges)
+- [Acknowledgments](#acknowledgments)
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Quick Start
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Prerequisites
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- Node.js (latest LTS version)
+- npm or yarn
+
+### Development Setup
+
+# Create production build
+
+npm run build
+
+# Serve production build
+
+npm run start
+
+## Project Structure
+
+![Project Structure](/dicom/public/project_structure.png)
+
+## Core Components
+
+### 1. Appbar
+
+- Logo display
+- Dark mode toggle functionality
+
+### 2. Homepage
+
+- Main entry point
+- User interface inspired by vzy.co
+
+### 3. UploadButtonPage
+
+- DICOM file upload interface
+- File validation and processing
+
+### 4. ImageCanvas
+
+- Konva.js integration
+- Canvas stage management
+- Cropping area implementation
+- Measurement tools
+
+### 5. MetaDataPage
+
+- DICOM metadata display
+- Patient information
+- Study details
+- Modality information
+
+### 6. ToolBar
+
+- Image manipulation tools
+- Measurement controls
+
+### 7. DicomViewer
+
+- Main viewer component
+- Brightness/contrast controls
+- Magnification tools
+- Image manipulation functions
+
+## Technical Implementation
+
+### DICOM Processing
+
+- Utilizes cornerstone.js for DICOM parsing
+- Implements dicom-parser and dicom-image-loader
+- Local storage integration for image persistence
+
+### Image Persistence
+
+Image loading process:
+
+1. Store base64 string in localStorage
+2. Extract and validate image type
+3. For standard images: direct base64 rendering
+4. For DICOM:
+   - Convert base64 to Blob
+   - Process through cornerstone
+   - Generate Image ID
+   - Render using Konva.js
+
+## Development Challenges
+
+### 1. DICOM Understanding
+
+- Required research into DICOM format
+- Studied existing viewers for inspiration
+- Analyzed medical imaging requirements
+
+### 2. Library Selection
+
+- Initially attempted ohif/core
+- TypeScript compatibility issues
+- Switched to cornerstone.js for better integration
+
+### 3. Image Persistence
+
+- Implemented base64 storage solution
+- Developed custom loading pipeline
+- Handled different image format types
+
+## Acknowledgments
+
+- Origin Medical team
+- Cornerstone.js community
+- Konva.js developers

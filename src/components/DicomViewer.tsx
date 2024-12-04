@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import { KonvaEventObject } from "konva/lib/Node";
 import Konva from "konva";
 import cornerstone from "cornerstone-core";
-import Configure_Loader from "../services/Configure";
 import getImageId from "../services/GetImageId";
 import Loader from "../services/Loader";
 import { PuffLoader } from "react-spinners";
@@ -12,11 +11,12 @@ import {
   Measurement,
   DicomMetadata,
   DicomImageType,
-} from "../types/interface";
+} from "../types/types";
 import { isRegularImage } from "../services/IsRegularImage";
 import ImageCanvas from "./ImageCanvas";
 import Metadata from "./MetaData";
 import ToolBar from "./ToolBar";
+import Configuration from "../services/Configure";
 
 const DicomViewer: React.FC = () => {
   const [image, setImage] = useState<HTMLImageElement | null>(null);
@@ -98,7 +98,7 @@ const DicomViewer: React.FC = () => {
         const dicomBlob = new Blob([byteArrays], { type: "application/dicom" });
         const dicomFile = new File([dicomBlob], "dicomFile.dcm");
 
-        Configure_Loader();
+        Configuration();
         const imageId = getImageId(dicomFile);
         const dicomImage = (await Loader(imageId)) as DicomImageType;
 
@@ -461,22 +461,16 @@ const DicomViewer: React.FC = () => {
   };
 
   const handleToolSelect = (tool: string) => {
-    if (tool === selectedTool) {
-      // If clicking the same tool again, turn it off
-
-      setIsMagnifying(false);
+    setSelectedTool(tool);
+    if (tool === "magnify") {
+      setIsMagnifying(true);
     } else {
-      setSelectedTool(tool);
-      if (tool === "magnify") {
-        setIsMagnifying(true);
-      } else {
-        setIsMagnifying(false);
-      }
-      if (tool === "adjust") {
-        setIsCropping(false);
-        setIsDragging(false);
-        setIsMeasuring(false);
-      }
+      setIsMagnifying(false);
+    }
+    if (tool === "adjust") {
+      setIsCropping(false);
+      setIsDragging(false);
+      setIsMeasuring(false);
     }
   };
 

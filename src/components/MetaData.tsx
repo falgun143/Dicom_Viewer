@@ -1,5 +1,5 @@
 import React from "react";
-import { DicomMetadata } from "../types/interface";
+import { DicomMetadata } from "../types/types";
 
 interface MetadataProps {
   metadata: DicomMetadata;

@@ -19,22 +19,8 @@ const UploadButtons = () => {
 
     try {
       const file = files[0];
-      if (file.name.endsWith('.dcm')) {
-        // Handle DICOM file
-        const base64Image = await FileToBase64(file);
-        localStorage.setItem("dicomImageBase64", base64Image);
-      } else if (file.type.startsWith('image/')) {
-        // Handle regular image file
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          if (e.target?.result) {
-            localStorage.setItem("dicomImageBase64", e.target.result as string);
-          }
-        };
-        reader.readAsDataURL(file);
-      } else {
-        throw new Error("Please upload a valid DICOM or image file.");
-      }
+      const base64Image = await FileToBase64(file);
+      localStorage.setItem("dicomImageBase64", base64Image);
       navigate("/dicom");
     } catch (error) {
       console.error("Error loading file:", error);
@@ -46,7 +32,8 @@ const UploadButtons = () => {
     <div className="flex flex-col items-center justify-center w-screen h-screen bg-white dark:bg-[#121212] text-gray-800 dark:text-gray-200">
       <h1 className="mb-6 text-3xl font-bold">Upload Medical Image</h1>
       <p className="mb-4 text-center text-lg">
-        Drag and drop your DICOM or image files or click the button below to upload.
+        Drag and drop your DICOM or image files or click the button below to
+        upload.
       </p>
       <input
         type="file"

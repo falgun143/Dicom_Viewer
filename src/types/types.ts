@@ -1,24 +1,24 @@
 import { KonvaEventObject } from "konva/lib/Node";
 import Konva from "konva";
 
-export interface ImageSize {
+export type ImageSize = {
   width: number;
   height: number;
 }
 
-export interface Position {
+export type Position = {
   x: number;
   y: number;
 }
 
-export interface Measurement {
+export type Measurement = {
   startPoint: Position | null;
   endPoint: Position | null;
   distance: number;
   realWorldDistance: number;
 }
 
-export interface DicomMetadata {
+export type DicomMetadata = {
   patientName?: string;
   patientId?: string;
   studyDate?: string;
@@ -27,7 +27,7 @@ export interface DicomMetadata {
   pixelSpacing?: number;
 }
 
-export interface ImageCanvasProps {
+export type ImageCanvasProps = {
   image: HTMLImageElement | null;
   imageSize: ImageSize;
   position: Position;
@@ -57,7 +57,7 @@ export interface ImageCanvasProps {
   magnifierColor: string;
 }
 
-export interface DicomImageType {
+export type DicomImageType = {
   data?: {
     string: (tag: string) => string | undefined;
   };

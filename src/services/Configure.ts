@@ -3,7 +3,7 @@ import dicomParser from "dicom-parser";
 import cornerstoneWADOImageLoader from "cornerstone-wado-image-loader";
 cornerstoneWADOImageLoader.external.dicomParser = dicomParser;
 
-const Configure_Loader = () => {
+const Configuration = () => {
   cornerstoneWADOImageLoader.external.cornerstone = cornerstone;
   cornerstoneWADOImageLoader.configure({
     useWebWorkers: true,
@@ -16,4 +16,4 @@ const Configure_Loader = () => {
   });
 };
 
-export default Configure_Loader;
+export default Configuration;
