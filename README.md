@@ -18,7 +18,7 @@
 
 A specialized web application for viewing and manipulating DICOM (Digital Imaging and Communications in Medicine) files, built with React, TypeScript, and Konva.js.
 
-## 🛠️ Tech Stack 
+## 🛠️ Tech Stack
 
 <div align="center">
   <table>
@@ -105,7 +105,7 @@ npm run start
 
 ### 5. MetaDataPage
 
-## 💡Technical Implementation
+## 💡 Technical Implementation
 
 ### DICOM Processing
 - Utilizes [cornerstone.js](https://www.cornerstonejs.org/) for DICOM parsing
