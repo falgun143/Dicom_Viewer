@@ -14,13 +14,13 @@
 - [Development Challenges](#-development-challenges)
 - [Acknowledgments](#-acknowledgments)
 
-## 📋 Overview 
+## 📋 Overview
 
 A specialized web application for viewing and manipulating DICOM (Digital Imaging and Communications in Medicine) files, built with React, TypeScript, and Konva.js.
 
 ## 🛠️ Tech Stack
 
-<div align="center">
+<div align="cer">
   <table>
     <tr>
       <td align="center">
@@ -55,6 +55,7 @@ https://github.com/user-attachments/assets/ee52063e-4bbd-44d5-89e8-c42e1ebc2e2e
 ## 🚀 Quick Start
 
 ### Development Setup
+
 ```bash
 # Clone repository
 git clone https://github.com/falgun143/Dicom_Viewer.git
@@ -65,7 +66,9 @@ npm install
 # Start development server
 npm run dev
 ```
+
 ### 🐳 Docker Setup
+
 ```bash
 # Build Docker image
 docker build -t dicom_viewer .
@@ -75,17 +78,23 @@ docker run -p 5173:5173 dicom_viewer
 ```
 
 ### Create production build
+
 ```bash
 npm run build
 ```
+
 ### Serve production build
+
 ```bash
 npm run start
 ```
 
 ## 🏗️ Project Structure
 
-[View Project Structure](public/project_structure.png)
+<div align="center">
+  <img src="public/project_structure.png" alt="Project Structur
+e" width="800"/>
+</div>
 
 ## 🧩 Core Components
 
@@ -93,7 +102,8 @@ npm run start
 
 ### 2. Homepage
 - Main entry point
-- User interface inspired by [Vzy.co](https://vzy.co/)
+- User interface ins
+pired by [Vzy.co](https://vzy.co/)
 
 ### 3. UploadButtonPage
 
@@ -101,7 +111,8 @@ npm run start
 - [Konva.js](https://konvajs.org/) integration
 - Canvas stage management
 - Cropping area implementation
-- Measurement tools
+- Measurement t
+ools
 
 ### 5. MetaDataPage
 
@@ -109,17 +120,20 @@ npm run start
 
 ### DICOM Processing
 - Utilizes [cornerstone.js](https://www.cornerstonejs.org/) for DICOM parsing
-- Implements dicom-parser and dicom-image-loader
+- Implements dicom-parser and dicom-image-l
+oader
 - Local storage integration for image persistence
 
 ### Canvas Management
 - Konva.js for interactive canvas elements
-- Custom stage management for optimal performance
+- Custom stage management for optimal 
+performance
 - Event handling for mouse/touch interactions
 
 ### State Management
 - React Context API for global state
-- Custom hooks for DICOM operations
+- Custom hooks for DICOM operat
+ions
 - Local storage integration for persistence
 
 ### Image Processing Pipeline
