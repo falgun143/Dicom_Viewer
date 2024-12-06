@@ -18,7 +18,7 @@
 
 A specialized web application for viewing and manipulating DICOM (Digital Imaging and Communications in Medicine) files, built with React, TypeScript, and Konva.js.
 
-## Tech Stack 🛠️
+## 🛠️ Tech Stack 
 
 <div align="center">
   <table>
@@ -48,11 +48,11 @@ A specialized web application for viewing and manipulating DICOM (Digital Imagin
   </table>
 </div>
 
-## Demo Video 🎬
+## 🎬 Demo Video
 
 https://github.com/user-attachments/assets/ee52063e-4bbd-44d5-89e8-c42e1ebc2e2e
 
-## Quick Start 🚀
+## 🚀 Quick Start
 
 ### Development Setup
 ```bash
@@ -65,7 +65,7 @@ npm install
 # Start development server
 npm run dev
 ```
-### Docker Setup 🐳
+### 🐳 Docker Setup
 ```bash
 # Build Docker image
 docker build -t dicom_viewer .
@@ -83,11 +83,11 @@ npm run build
 npm run start
 ```
 
-## Project Structure 🏗️
+## 🏗️ Project Structure
 
 [View Project Structure](public/project_structure.png)
 
-## Core Components 🧩
+## 🧩 Core Components
 
 ### 1. Appbar
 
@@ -105,7 +105,7 @@ npm run start
 
 ### 5. MetaDataPage
 
-## Technical Implementation 💡
+## 💡Technical Implementation
 
 ### DICOM Processing
 - Utilizes [cornerstone.js](https://www.cornerstonejs.org/) for DICOM parsing
@@ -132,7 +132,7 @@ npm run start
    - Generate Image ID
    - Render using Konva.js
 
-## Development Challenges 🔧
+## 🔧 Development Challenges
 
 ### 1. DICOM Understanding
 
@@ -152,7 +152,7 @@ npm run start
 - Developed custom loading pipeline
 - Handled different image format types
 
-## Acknowledgments 🙏
+## 🙏 Acknowledgments
 
 - Origin Medical team
 - Cornerstone.js community
