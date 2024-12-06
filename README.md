@@ -17,6 +17,36 @@
 
 A specialized web application for viewing and manipulating DICOM (Digital Imaging and Communications in Medicine) files, built with React, TypeScript, and Konva.js.
 
+## Tech Stack 🛠️
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <a href="https://vitejs.dev/">
+          <img src="https://vitejs.dev/logo.svg" width="50" alt="Vite"/>
+          <br />
+          <b>Vite + React</b>
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://www.cornerstonejs.org/">
+          <img src="https://www.cornerstonejs.org/img/cornerstone-logo-badge.png" width="50" alt="Cornerstone.js"/>
+          <br />
+          <b>Cornerstone.js</b>
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://konvajs.org/">
+          <img src="https://konvajs.org/apple-touch-icon.png" width="50" alt="Konva.js"/>
+          <br />
+          <b>Konva.js</b>
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>
+
 ## Demo Video 🎬
 
 https://github.com/user-attachments/assets/ee52063e-4bbd-44d5-89e8-c42e1ebc2e2e
@@ -43,16 +73,16 @@ docker build -t dicom_viewer .
 docker run -p 5173:5173 dicom_viewer
 ```
 
-# Create production build
+### Create production build
 ```bash
 npm run build
 ```
-# Serve production build
+### Serve production build
 ```bash
 npm run start
 ```
 
-### Project Structure 🏗️
+## Project Structure 🏗️
 
 ![Project Structure](/public/project_structure.png)
 
