@@ -4,16 +4,17 @@
 
 ## Table of Contents 📑
 
-- [Overview](#overview-📋)
-- [Demo Video](#demo-video-🎬)
-- [Quick Start](#quick-start-🚀)
-- [Project Structure](#project-structure-🏗️)
-- [Core Components](#core-components-🧩)
-- [Technical Implementation](#technical-implementation-💡)
-- [Development Challenges](#development-challenges-🔧)
-- [Acknowledgments](#acknowledgments-🙏)
+- [Overview](#-overview)
+- [Tech Stack](#-tech-stack)
+- [Demo Video](#-demo-video)
+- [Quick Start](#-quick-start)
+- [Project Structure](#-project-structure)
+- [Core Components](#-core-components)
+- [Technical Implementation](#-technical-implementation)
+- [Development Challenges](#-development-challenges)
+- [Acknowledgments](#-acknowledgments)
 
-## Overview 📋
+## 📋 Overview 
 
 A specialized web application for viewing and manipulating DICOM (Digital Imaging and Communications in Medicine) files, built with React, TypeScript, and Konva.js.
 
@@ -84,63 +85,44 @@ npm run start
 
 ## Project Structure 🏗️
 
-![Project Structure](/public/project_structure.png)
+[View Project Structure](public/project_structure.png)
 
 ## Core Components 🧩
 
 ### 1. Appbar
 
-- Logo display
-- Dark mode toggle functionality
-
 ### 2. Homepage
-
 - Main entry point
-- User interface inspired by <a href="https://vzy.co/">Vzy.co</a>
+- User interface inspired by [Vzy.co](https://vzy.co/)
 
 ### 3. UploadButtonPage
 
-- DICOM file upload interface
-- File validation and processing
-
 ### 4. ImageCanvas
-
-- <a href="https://konvajs.org/">Konva.js</a> integration
+- [Konva.js](https://konvajs.org/) integration
 - Canvas stage management
 - Cropping area implementation
 - Measurement tools
 
 ### 5. MetaDataPage
 
-- DICOM metadata display
-- Patient information
-- Study details
-- Modality information
-
-### 6. ToolBar
-
-- Image manipulation tools
-- Measurement controls
-
-### 7. DicomViewer
-
-- Main viewer component
-- Brightness/contrast controls
-- Magnification tools
-- Image manipulation functions
-
 ## Technical Implementation 💡
 
 ### DICOM Processing
-
-- Utilizes <a href="https://www.cornerstonejs.org/">cornerstone.js</a> for DICOM parsing
+- Utilizes [cornerstone.js](https://www.cornerstonejs.org/) for DICOM parsing
 - Implements dicom-parser and dicom-image-loader
 - Local storage integration for image persistence
 
-### Image Persistence
+### Canvas Management
+- Konva.js for interactive canvas elements
+- Custom stage management for optimal performance
+- Event handling for mouse/touch interactions
 
-Image loading process:
+### State Management
+- React Context API for global state
+- Custom hooks for DICOM operations
+- Local storage integration for persistence
 
+### Image Processing Pipeline
 1. Store base64 string in localStorage
 2. Extract and validate image type
 3. For standard images: direct base64 rendering
