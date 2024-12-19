@@ -1,13 +1,16 @@
 {
     "version": 2,
     "routes": [
-      {
-        "src": "/origin_Medical.svg",
-        "dest": "/public/origin_Medical.svg",
-        "headers": {
-          "Content-Type": "image/svg+xml"
+        {
+            "src": "/origin_Medical.svg",
+            "dest": "/public/origin_Medical.svg",
+            "headers": {
+                "Content-Type": "image/svg+xml"
+            }
         }
-      }
     ],
-    "public": true
-  }
+    "public": true,
+    "rewrites": [
+        { "source": "/(.*)", "destination": "/" }
+    ]
+}
